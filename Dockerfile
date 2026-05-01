@@ -25,6 +25,7 @@ COPY app.py .
 COPY detection_service.py .
 COPY analysis_service.py .
 COPY database_service.py .
+COPY use_case_service.py .
 COPY config.py .
 
 
@@ -35,11 +36,11 @@ RUN mkdir -p assets
 COPY assets/ ./assets/
 
 # Expose port
-EXPOSE 8501
+EXPOSE 8505
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8501/ || exit 1
+    CMD curl -f http://localhost:8505/ || exit 1
 
 # Run the application
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port=8505", "--server.address=0.0.0.0"]
